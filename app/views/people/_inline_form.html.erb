@@ -1,0 +1,31 @@
+<%= form_with model: person, class: 'divTableRow', id: dom_id(person, 'inline_form') do |form| %>
+  <div class="divTableCell">
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="divTableCell">
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="divTableCell">
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="divTableCell">
+    <%= form.text_field :phone %>
+  </div>
+
+  <% if person.errors.any? %>
+    <div id="error_explanation" class="divTableCell">
+      
+        <% person.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      
+    </div>
+  <% end %>
+
+  <div class="divTableCell">
+    <%= form.submit %>
+  </div>
+<% end %>

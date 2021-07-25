@@ -1,0 +1,74 @@
+// Place all the styles related to the people controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+/* DivTable.com */
+div.paleBlueRows {
+	font-family: "Calibri", Times, serif;
+	border: 1px solid #FFFFFF;
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+}
+.divTable.paleBlueRows {
+	.divTableCell {
+		border: 1px solid #8e8deb;
+		padding: 3px 2px;
+	}
+	.divTableHead {
+		border: 1px solid #8e8deb;
+		padding: 3px 2px;
+	}
+	.divTableBody {
+		.divTableCell {
+			font-size: 13px;
+		}
+	}
+	.divTableRow {
+		&:nth-child(even) {
+			background: #bdbcf3;
+		}
+	}
+	.divTableHeading {
+		background: #504de9;
+		border-bottom: 5px solid #8e8deb;
+		.divTableHead {
+			font-size: 17px;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-align: center;
+			border-left: 2px solid #8e8deb;
+			&:first-child {
+				border-left: none;
+			}
+		}
+	}
+}
+.paleBlueRows {
+	.tableFootStyle {
+		font-size: 14px;
+	}
+}
+.divTable {
+	display: table;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+	display: table-header-group;
+	display: table-header-group;
+}
+.divTableCell {
+	display: table-cell;
+}
+.divTableHead {
+	display: table-cell;
+}
+.divTableFoot {
+	display: table-footer-group;
+}
+.divTableBody {
+	display: table-row-group;
+}

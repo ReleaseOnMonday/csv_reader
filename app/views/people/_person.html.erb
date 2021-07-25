@@ -1,0 +1,9 @@
+<div class="divTableCell"><%= person.first_name %></div>
+<div class="divTableCell"><%= person.last_name %></div>
+<div class="divTableCell"><%= person.email %></div>
+<div class="divTableCell"><%= person.phone %></div>
+<div class="divTableCell">
+    <%= link_to 'Show', person %>
+    <%= link_to 'Edit', edit_person_path(person), remote: true %>
+    <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Confirm Delete Record?' } %>
+</div>
