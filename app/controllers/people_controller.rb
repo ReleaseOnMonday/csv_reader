@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
+  before_action :valid_csv_file, only: %i[ import ]
 
   # GET /people or /people.json
   def index
@@ -83,5 +84,15 @@ class PeopleController < ApplicationController
     # Only allow a list of trusted parameters through.
     def person_params
       params.require(:person).permit(:first_name, :last_name, :email, :phone)
+    end
+
+    def valid_csv_file
+      if params[:file].nil?
+        flash[:notice] = "No File Uploaded!"
+        redirect_to people_url
+      elsif params[:file].content_type != 'text/csv'
+        flash[:notice] = "File type must be csv: #{params[:file].original_filename}"
+        redirect_to people_url
+      end
     end
 end
