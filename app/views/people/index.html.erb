@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>People</h1>
+
+<div class="divTable paleBlueRows">
+  <div class="divTableHeading">
+    <div class="divTableRow">
+      <div class="divTableHead">ID</div>
+      <div class="divTableHead">First Name</div>
+      <div class="divTableHead">Last Name</div>
+      <div class="divTableHead">Email</div>
+      <div class="divTableHead">Phone</div>
+      <div class="divTableHead">Save Errors</div>
+      <div class="divTableHead">Actions</div>
+    </div>
+  </div>
+  <%# unless @imported_people.nil? %>
+  <div class="divTableBody">
+    <% @people.each do |person| %>
+      <%= content_tag :div, class: 'divTableRow', id: dom_id(person) do %>
+        <%= render person %>
+      <% end %>
+    <% end %>
+  </div>
+  <%# end %>
+</div>
+
+<br>
+
+<%= form_tag people_import_path, multipart: true do %>
+  <%= file_field_tag :file, :accept => 'text/csv', required: true%><br/><br/>
+  <%= submit_tag "Import" %>
+<% end %>

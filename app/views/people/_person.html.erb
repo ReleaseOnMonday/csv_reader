@@ -1,0 +1,20 @@
+<div class="divTableCell"><%= person.id %></div>
+<div class="divTableCell"><%= person.first_name %></div>
+<div class="divTableCell"><%= person.last_name %></div>
+<div class="divTableCell"><%= person.email %></div>
+<div class="divTableCell"><%= person.phone %></div>
+<div class="divTableCell">
+  <% if person.errors.any? %>
+    <div id="error_explanation" class="divTableCell">
+      
+        <% person.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      
+    </div>
+  <% end %>
+</div>
+<div class="divTableCell">
+    <%= link_to 'Edit', edit_person_path(person), remote: true %>&nbsp;
+    <%= link_to 'Destroy', person, method: :delete %>
+</div>
