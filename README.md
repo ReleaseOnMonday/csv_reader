@@ -1,24 +1,29 @@
-# README
+# CHALLENGE STATEMENT
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Input
 
-Things you may want to cover:
+Given a form accepting a CSV file. CSV file contains the following fields with a header: `first_name`, `last_name`, `email`, `phone`
 
-* Ruby version
+After submitting the form it saves the data to the `people` table with the following validations:
 
-* System dependencies
+first_name|last_name|email|phone
+-----|----|----|----
+non-empty|non-empty|any e-mail regexp you like|starts  from + sign and then a series of numbers, e.g. `+1100500700`
 
-* Configuration
+# Output
 
-* Database creation
+Displays a result in a table:
 
-* Database initialization
+id|first_name|last_name|email|phone|errors|save
+--|----|---|----|----|-----|------
+id of the record|first_name value|last_name value|email value|phone value|validtion errors|save button
 
-* How to run the test suite
+If a record save fails then `first_name value`, `last_name value`, `email value`, `phone value` should contain editable fields so user can change them and attempt to re-save.
+The `Save` button attempts to re-save the record and only available for the records which are not persisted in the database.
 
-* Services (job queues, cache servers, search engines, etc.)
+# Other requirements
 
-* Deployment instructions
-
-* ...
+* This is a single-page application
+* Back-end: Ruby on Rails
+* Front-end: Marionette + CoffeeScript
+* Code is covered with tests
