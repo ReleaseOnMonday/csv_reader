@@ -1,5 +1,4 @@
 class PeopleImport < ApplicationRecord
-  require 'csv'
   attr_reader :file
 
   def initialize(csv_file)

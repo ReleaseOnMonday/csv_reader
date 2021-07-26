@@ -27,7 +27,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.save
         format.js {}
-        format.html { redirect_to people_url, notice: "Person was successfully created." }
+        format.html { redirect_to people_url, notice: "Person #{@person.first_name} was successfully created." }
         format.json { render :show, status: :created, location: @person }
       else
         format.js {}
@@ -70,8 +70,7 @@ class PeopleController < ApplicationController
     else
       flash[:errors] = @import.invalid_records
       @records = @import.invalid_records
-      render :inline => 
-      "<% @records.each do |p| %><%= render 'inline_form', remote: true, person: p, class: 'divTableRow' %><% end %>"
+      render :partial => 'form_create', persons: @records
     end
   end
 
@@ -86,6 +85,7 @@ class PeopleController < ApplicationController
       params.require(:person).permit(:first_name, :last_name, :email, :phone)
     end
 
+    # Only allow valid csv files
     def valid_csv_file
       if params[:file].nil?
         flash[:notice] = "No File Uploaded!"
