@@ -25,10 +25,12 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
+        format.js {}
         format.html { redirect_to people_url, notice: "Person was successfully created." }
         format.json { render :show, status: :created, location: @person }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.js {}
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
@@ -55,6 +57,20 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to people_url, notice: "Person was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def import
+    
+    @import = PeopleImport.new(params[:file])
+
+    if @import.save
+     redirect_to people_url, notice: "CSV data imported!"
+    else
+      flash[:errors] = @import.invalid_records
+      @records = @import.invalid_records
+      render :inline => 
+      "<% @records.each do |p| %><%= render 'inline_form', remote: true, person: p, class: 'divTableRow' %><% end %>"
     end
   end
 

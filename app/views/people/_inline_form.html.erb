@@ -1,4 +1,7 @@
-<%= form_with model: person, class: 'divTableRow', id: dom_id(person, 'inline_form') do |form| %>
+<%= form_with model: person, remote: true, class: 'divTableRow', id: dom_id(person, 'inline_form') do |form| %>
+  <div class="divTableCell">
+    <%= form.label :id %>
+  </div>
   <div class="divTableCell">
     <%= form.text_field :first_name %>
   </div>
@@ -15,15 +18,13 @@
     <%= form.text_field :phone %>
   </div>
 
-  <% if person.errors.any? %>
-    <div id="error_explanation" class="divTableCell">
-      
+  <div class="divTableCell">
+    <% if person.errors.any? %>
         <% person.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <li id="error_explanation"><%= error.full_message %></li>
         <% end %>
-      
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <div class="divTableCell">
     <%= form.submit %>
