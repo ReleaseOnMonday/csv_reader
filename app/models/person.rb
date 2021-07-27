@@ -1,6 +1,6 @@
 class Person < ApplicationRecord
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    VALID_PHONE_REGEX = /\A([+]?\d{6,15}?|)\z/
+    VALID_PHONE_REGEX = /\A([+]{1}\d{6,15}?|)\z/
     MESSAGE = "entry is invalid"
 
     validates :first_name, :last_name, presence: true

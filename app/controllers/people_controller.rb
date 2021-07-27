@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: %i[ show edit update destroy ]
+  before_action :set_person, only: %i[ update destroy ]
   before_action :valid_csv_file, only: %i[ import ]
 
   # GET /people or /people.json
@@ -62,16 +62,33 @@ class PeopleController < ApplicationController
   end
 
   def import
-    
     @import = PeopleImport.new(params[:file])
 
     if @import.save
      redirect_to people_url, notice: "CSV data imported!"
     else
-      flash[:errors] = @import.invalid_records
       @records = @import.invalid_records
-      render :partial => 'form_create', persons: @records
+      if @records.empty? 
+        redirect_to people_url
+      else
+        render 'form_create'
+      end
     end
+  end
+
+  def update_multiple
+
+    people = params[:people]
+    people.map do |person|
+       record = Person.new
+       record.errors.clear
+       record.first_name = person.values[0]
+       record.last_name = person.values[1]
+       record.email = person.values[2]
+       record.phone = person.values[3]
+       record.save
+    end
+    redirect_to people_url
   end
 
   private

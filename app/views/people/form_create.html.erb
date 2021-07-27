@@ -1,0 +1,47 @@
+<h1>Edit Failed Records</h1>
+<%= form_tag update_multiple_people_path, method: :put do %>
+    <div class="divTable paleBlueRows">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+            <div class="divTableHead">First Name</div>
+            <div class="divTableHead">Last Name</div>
+            <div class="divTableHead">Email</div>
+            <div class="divTableHead">Phone</div>
+            <div class="divTableHead">Save Errors</div>
+            </div>
+        </div>
+        <% @records.each do |person| %>        
+            <%= fields_for "people[]", person do |form| %>
+                <div class='divTableRow'>
+                    <div class="divTableCell">
+                        <%= form.text_field :first_name, required: true %>
+                    </div>
+
+                    <div class="divTableCell">
+                        <%= form.text_field :last_name, required: true %>
+                    </div>
+
+                    <div class="divTableCell">
+                        <%= form.email_field :email %>
+                    </div>
+
+                    <div class="divTableCell">
+                        <%= form.telephone_field :phone, :pattern => '^([+]{1}\d{6,15}?|)$' %>
+                    </div>
+
+                    <div class="divTableCell">
+                        <% if person.errors.any? %>
+                            <% person.errors.each do |error| %>
+                                <li id="error_explanation"><%= error.full_message %></li>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %> 
+        <% end %>    
+    </div>
+    <div><br/>
+        <%= submit_tag "Update", class: "button" %>
+    </div>
+<% end %>
+    
