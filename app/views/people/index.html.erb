@@ -14,7 +14,6 @@
       <div class="divTableHead">Actions</div>
     </div>
   </div>
-  <%# unless @imported_people.nil? %>
   <div class="divTableBody">
     <% @people.each do |person| %>
       <%= content_tag :div, class: 'divTableRow', id: dom_id(person) do %>
@@ -22,12 +21,11 @@
       <% end %>
     <% end %>
   </div>
-  <%# end %>
 </div>
 
 <br>
 
-<%= form_tag people_import_path, multipart: true do %>
+<%= form_tag import_people_path, multipart: true do %>
   <%= file_field_tag :file, :accept => 'text/csv', required: true%><br/><br/>
   <%= submit_tag "Import" %>
 <% end %>
