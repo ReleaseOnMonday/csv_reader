@@ -48,6 +48,12 @@ module.exports = function(api) {
           legacy: true
         }
       ],
+
+      [
+        "@babel/plugin-proposal-private-methods", 
+        { 
+          "loose": true 
+        }],
       [
         '@babel/plugin-proposal-class-properties',
         {
